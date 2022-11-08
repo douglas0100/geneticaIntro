@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Individuo implements Comparable<Individuo> {
 
-    private static final double VALOR_MAXIMO = 10000;
+    public static final double VALOR_MAXIMO = 10000;
     private static Random aleatorio = new Random(0);
 
     private double gene1;
@@ -27,12 +27,24 @@ public class Individuo implements Comparable<Individuo> {
         return this.gene2;
     }
 
-    public void setGene01(int gene1){
-        this.gene1 = gene1;
+    public void setGene01(double gene1){
+        if(gene1 < 0){
+            this.gene1 = 0;
+        }else if (gene1 > VALOR_MAXIMO){
+            this.gene1 = VALOR_MAXIMO;
+        }else{
+            this.gene1 = gene1;
+        }
     }
     
-    public void setGene02(int gene2){
-        this.gene2 = gene2;
+    public void setGene02(double gene2){
+        if(gene2 < 0){
+            this.gene2 = 0;
+        }else if(gene2 > VALOR_MAXIMO){
+            this.gene2 = VALOR_MAXIMO;
+        }else {
+            this.gene2 = gene2;
+        }
     }
 
     //public double funcao(){

@@ -1,10 +1,10 @@
 import java.util.LinkedList;
 import java.util.List;
-
 import java.util.Random;
 
 import Algoritmos.Cruzamento;
 import Algoritmos.Selecao;
+import Algoritmos.Mutacao;
 import Individuo.Individuo;
 
 public class Principal {
@@ -13,11 +13,11 @@ public class Principal {
 
     public static void main(String[] args) {
         
-        List<Individuo> populacao = criaPopulacao(100);
+        List<Individuo> populacao = criaPopulacao(20);
         imprimePopulacao(populacao);
 
         int i = 0;
-        while(i < 5){
+        while(i < 10){
 
             Selecao selecao = new Selecao(populacao);
 
@@ -36,14 +36,13 @@ public class Principal {
             cruzaPopulacao(novaGeracao, selecionados);
             imprimePopulacao(novaGeracao);
 
+            realizaMutacao(novaGeracao);
+
             populacao = novaGeracao;
 
             i++;
 
         }
-
-      
-
         
     }
 
@@ -71,11 +70,6 @@ public class Principal {
             Individuo individuoCruzado02 = cruzamento.criaIndividuoPorCruzamento()[1];
 
             if(i != (qtdIndividuos/2) - 1){
-
-                if(i == (qtdIndividuos/2) - 2){
-                    mutacao(individuoCruzado01);
-                }
-
                 novaGeracao.add(individuoCruzado01);
                 novaGeracao.add(individuoCruzado02);
             }
@@ -84,13 +78,20 @@ public class Principal {
 
     }
 
-    public static void mutacao(Individuo individuo){
-        if(aleat.nextInt(50) > 25){
-            individuo.setGene01(aleat.nextInt(1000));
-        } else{
-            individuo.setGene02(aleat.nextInt(1000));
+
+    public static void realizaMutacao(List<Individuo> populacao){
+        Mutacao mutacao = new Mutacao();
+        int tamPop = populacao.size();
+
+        for (int i = 0; i < (tamPop/10); i++) {
+            Individuo individuo = populacao.get(aleat.nextInt(tamPop - 1));
+            mutacao.mutacao(individuo);
         }
+
+        
     }
+
+   
 
     public static void imprimePopulacao(List<Individuo> populacao){
         int i = 1;
