@@ -1,17 +1,20 @@
 import java.util.LinkedList;
 import java.util.List;
 
+import java.util.Random;
+
 import Algoritmos.Cruzamento;
 import Algoritmos.Selecao;
 import Individuo.Individuo;
 
 public class Principal {
+
+    public static Random aleat = new Random();
+
     public static void main(String[] args) {
         
         List<Individuo> populacao = criaPopulacao(100);
         imprimePopulacao(populacao);
-
-        
 
         int i = 0;
         while(i < 5){
@@ -53,6 +56,7 @@ public class Principal {
         return populacao;
     }
 
+
     public static void cruzaPopulacao(List<Individuo> novaGeracao, List<Individuo> selecionados){
 
         int qtdIndividuos = selecionados.size();
@@ -67,6 +71,11 @@ public class Principal {
             Individuo individuoCruzado02 = cruzamento.criaIndividuoPorCruzamento()[1];
 
             if(i != (qtdIndividuos/2) - 1){
+
+                if(i == (qtdIndividuos/2) - 2){
+                    mutacao(individuoCruzado01);
+                }
+
                 novaGeracao.add(individuoCruzado01);
                 novaGeracao.add(individuoCruzado02);
             }
@@ -75,7 +84,13 @@ public class Principal {
 
     }
 
-
+    public static void mutacao(Individuo individuo){
+        if(aleat.nextInt(50) > 25){
+            individuo.setGene01(aleat.nextInt(1000));
+        } else{
+            individuo.setGene02(aleat.nextInt(1000));
+        }
+    }
 
     public static void imprimePopulacao(List<Individuo> populacao){
         int i = 1;

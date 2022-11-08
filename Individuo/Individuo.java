@@ -27,6 +27,14 @@ public class Individuo implements Comparable<Individuo> {
         return this.gene2;
     }
 
+    public void setGene01(int gene1){
+        this.gene1 = gene1;
+    }
+    
+    public void setGene02(int gene2){
+        this.gene2 = gene2;
+    }
+
     //public double funcao(){
     //    return 10 * this.gene1 - this.gene2 * this.gene2;
     //}
