@@ -2,20 +2,45 @@ import java.util.LinkedList;
 import java.util.List;
 
 import Algoritmos.Cruzamento;
+import Algoritmos.Selecao;
 import Individuo.Individuo;
 
 public class Principal {
     public static void main(String[] args) {
         
-        List<Individuo> populacao = criaPopulacao(10);
+        List<Individuo> populacao = criaPopulacao(100);
         imprimePopulacao(populacao);
 
-        cruzaPopulacao(populacao);
+        
 
-        System.out.println("");
-        System.out.println("");
+        int i = 0;
+        while(i < 5){
 
-        imprimePopulacao(populacao);
+            Selecao selecao = new Selecao(populacao);
+
+            Individuo eleito = selecao.eletismo(populacao);
+            Individuo eleito2 = selecao.eletismo(populacao);
+    
+            System.out.println("Individuo eleito = " + eleito);
+    
+            List<Individuo> novaGeracao = new LinkedList<>();
+            novaGeracao.add(eleito);
+            novaGeracao.add(eleito2);
+    
+            List<Individuo> selecionados = selecao.torneio();
+            imprimePopulacao(selecionados);
+    
+            cruzaPopulacao(novaGeracao, selecionados);
+            imprimePopulacao(novaGeracao);
+
+            populacao = novaGeracao;
+
+            i++;
+
+        }
+
+      
+
         
     }
 
@@ -28,33 +53,38 @@ public class Principal {
         return populacao;
     }
 
-    public static void cruzaPopulacao(List<Individuo> populacao){
+    public static void cruzaPopulacao(List<Individuo> novaGeracao, List<Individuo> selecionados){
 
-        int qtdIndividuos = populacao.size();
+        int qtdIndividuos = selecionados.size();
 
         for (int i = 1; i <= qtdIndividuos/2; i++) {
-            Individuo individuo01 = populacao.get(i - 1);
-            Individuo individuo02 = populacao.get(qtdIndividuos - i);
+            Individuo individuo01 = selecionados.get(i - 1);
+            Individuo individuo02 = selecionados.get(i);
 
             Cruzamento cruzamento = new Cruzamento(individuo01, individuo02);
 
             Individuo individuoCruzado01 = cruzamento.criaIndividuoPorCruzamento()[0];
             Individuo individuoCruzado02 = cruzamento.criaIndividuoPorCruzamento()[1];
 
-            populacao.remove(i - 1);
-            populacao.add(i - 1, individuoCruzado01);
-
-            populacao.remove(qtdIndividuos - i);
-            populacao.add(qtdIndividuos - i, individuoCruzado02);
+            if(i != (qtdIndividuos/2) - 1){
+                novaGeracao.add(individuoCruzado01);
+                novaGeracao.add(individuoCruzado02);
+            }
             
         }
+
     }
 
 
+
     public static void imprimePopulacao(List<Individuo> populacao){
+        int i = 1;
         for (Individuo individuo : populacao) {
-            System.out.println(individuo);
+            System.out.println(i + "º " + individuo);
+            i++;
         }
+        System.out.println("");
+        System.out.println("");
     }
 
 }

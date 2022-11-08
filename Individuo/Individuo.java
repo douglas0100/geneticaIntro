@@ -1,10 +1,10 @@
 package Individuo;
 import java.util.Random;
 
-public class Individuo {
+public class Individuo implements Comparable<Individuo> {
 
     private static final double VALOR_MAXIMO = 10000;
-    private static Random aleatorio = new Random();
+    private static Random aleatorio = new Random(0);
 
     private double gene1;
     private double gene2;
@@ -27,13 +27,31 @@ public class Individuo {
         return this.gene2;
     }
 
-    public double funcao(double gene1, double gene2){
-        return 10 * gene1 - gene2 * gene2;
+    //public double funcao(){
+    //    return 10 * this.gene1 - this.gene2 * this.gene2;
+    //}
+
+    public double funcao(){
+        return this.gene1 - this.gene2;
     }
 
     @Override
     public String toString(){
         return String.format("Individuo [X1: %.2f | X2: %.2f]", this.gene1, this.gene2);
+    }
+
+    @Override
+    public int compareTo(Individuo outroIndividuo) {
+        if(this.funcao() > outroIndividuo.funcao()){
+            return 1;
+        } 
+        else if(this.funcao() < outroIndividuo.funcao()){
+            return -1;
+        }
+        else{
+            return 0;
+        }
+        
     }
     
 }
