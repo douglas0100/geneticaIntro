@@ -11,11 +11,9 @@ public class Selecao {
     public static Random aleat = new Random();
     private List<Individuo> populacao;
     
-
     public Selecao(List<Individuo> populacao){
         this.populacao = populacao;
     }
-
 
     public List<Individuo> torneio(){
         List<Individuo> selecionados = new LinkedList<>();
@@ -35,7 +33,6 @@ public class Selecao {
         return selecionados;
     }
 
-
     public static Individuo eletismo(List<Individuo> populacao){
         Individuo melhor  = populacao.get(0);
         for (int i = 1; i < populacao.size(); i++) {
@@ -47,8 +44,5 @@ public class Selecao {
         }
         return melhor;
     }
-
-
-
 
 }

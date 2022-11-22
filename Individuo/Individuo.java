@@ -52,7 +52,7 @@ public class Individuo implements Comparable<Individuo> {
     //}
 
     public double funcao(){
-        return this.gene1 - this.gene2;
+        return (((Math.sqrt(this.gene1) * Math.sqrt(9) - 2) * 2) - ((Math.sqrt(this.gene2) * Math.sqrt(4) + 1) * 3));
     }
 
     @Override

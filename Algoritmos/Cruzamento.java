@@ -1,8 +1,5 @@
 package Algoritmos;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import Individuo.Individuo;
 
 public class Cruzamento {

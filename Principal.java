@@ -13,11 +13,11 @@ public class Principal {
 
     public static void main(String[] args) {
         
-        List<Individuo> populacao = criaPopulacao(20);
+        List<Individuo> populacao = criaPopulacao(25);
         imprimePopulacao(populacao);
 
         int i = 0;
-        while(i < 10){
+        while(i < 15){
 
             Selecao selecao = new Selecao(populacao);
 
@@ -73,9 +73,7 @@ public class Principal {
                 novaGeracao.add(individuoCruzado01);
                 novaGeracao.add(individuoCruzado02);
             }
-            
         }
-
     }
 
 
@@ -87,8 +85,6 @@ public class Principal {
             Individuo individuo = populacao.get(aleat.nextInt(tamPop - 1));
             mutacao.mutacao(individuo);
         }
-
-        
     }
 
    
